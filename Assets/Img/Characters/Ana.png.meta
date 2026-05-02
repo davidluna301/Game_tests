@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1cc349c845c2be744acf03a4d1e51507
+guid: d6b92d4ab17272041a44d5e9fa18563f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8339883089099270730
-    second: Simon-removebg-preview_0
+      213: -8792776842961747170
+    second: Ana_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Simon-removebg-preview_0
+      name: Ana_0
       rect:
         serializedVersion: 2
-        x: 130
-        y: 7
-        width: 181
+        x: 75
+        y: 9
+        width: 304
         height: 568
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a4aac02ab773db370800000000000000
-      internalID: 8339883089099270730
+      spriteID: e130cf52c08c9f580800000000000000
+      internalID: -8792776842961747170
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Simon-removebg-preview_0: 8339883089099270730
+      Ana_0: -8792776842961747170
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

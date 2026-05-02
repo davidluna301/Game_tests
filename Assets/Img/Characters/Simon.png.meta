@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a0f47d30cd2c8a34cb9f6db82f3cfb43
+guid: 8aa0be09e8573504982bdf984edba49d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4971084508045698545
-    second: Lucas-removebg-preview_0
+      213: 3517921492900332525
+    second: Simon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lucas-removebg-preview_0
+      name: Simon_0
       rect:
         serializedVersion: 2
         x: 130
         y: 7
-        width: 180
-        height: 567
+        width: 181
+        height: 568
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f0a1d755af8230bb0800000000000000
-      internalID: -4971084508045698545
+      spriteID: de3490485fa22d030800000000000000
+      internalID: 3517921492900332525
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lucas-removebg-preview_0: -4971084508045698545
+      Simon_0: 3517921492900332525
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

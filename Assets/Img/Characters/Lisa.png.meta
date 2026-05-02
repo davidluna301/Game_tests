@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a5b7ad6b282409e4e8040747fb8b3ac7
+guid: 6262fe6271f07be419fc11345306376e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2688874775492476630
-    second: Lisa-removebg-preview (1)_0
+      213: 5328894139677964944
+    second: Lisa_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lisa-removebg-preview (1)_0
+      name: Lisa_0
       rect:
         serializedVersion: 2
         x: 95
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a21434153a23faad0800000000000000
-      internalID: -2688874775492476630
+      spriteID: 09a7a218cf804f940800000000000000
+      internalID: 5328894139677964944
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lisa-removebg-preview (1)_0: -2688874775492476630
+      Lisa_0: 5328894139677964944
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

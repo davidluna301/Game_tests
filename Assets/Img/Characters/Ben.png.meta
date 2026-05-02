@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 43ff8310e0d321f4a98c6083e389d07e
+guid: a52a49d9dc5295e4486fa1c7e219f7e5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7182479392105003702
-    second: Ana-removebg-preview_0
+      213: 883382283120842390
+    second: Ben_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ana-removebg-preview_0
+      name: Ben_0
       rect:
         serializedVersion: 2
-        x: 75
-        y: 9
-        width: 304
-        height: 568
+        x: 81
+        y: 19
+        width: 216
+        height: 577
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a45840b1c05b25c90800000000000000
-      internalID: -7182479392105003702
+      spriteID: 6969a429187624c00800000000000000
+      internalID: 883382283120842390
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ana-removebg-preview_0: -7182479392105003702
+      Ben_0: 883382283120842390
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
