@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 0c49fb557918bbe4a949a6b25ba04faa
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6282543948999516342
+    second: Skip_Game_Button_0
+  - first:
+      213: 5482541224704974045
+    second: Skip_Game_Button_1
+  - first:
+      213: -670329121707284240
+    second: Skip_Game_Button_2
+  - first:
+      213: 6018874326110513324
+    second: Skip_Game_Button_3
+  - first:
+      213: -4936168528060665544
+    second: Skip_Game_Button_4
+  - first:
+      213: 5207296969347905524
+    second: Skip_Game_Button_5
+  - first:
+      213: -2006508606787759427
+    second: Skip_Game_Button_6
+  - first:
+      213: 1310050664223154642
+    second: Skip_Game_Button_7
+  - first:
+      213: -2500051671301855745
+    second: Skip_Game_Button_8
+  - first:
+      213: -9071862912447478652
+    second: Skip_Game_Button_9
+  - first:
+      213: -8102110298057879355
+    second: Skip_Game_Button_10
+  - first:
+      213: -3525604683964198632
+    second: Skip_Game_Button_11
+  - first:
+      213: -9216633341325904346
+    second: Skip_Game_Button_12
+  - first:
+      213: 8770545260093833859
+    second: Skip_Game_Button_13
+  - first:
+      213: -8665192887039191507
+    second: Skip_Game_Button_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Skip_Game_Button_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 110
+        height: 1023
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4f9a12909befc8a0800000000000000
+      internalID: -6282543948999516342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 707
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddc99f43236e51c40800000000000000
+      internalID: 5482541224704974045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_2
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 654
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f8a902273382b6f0800000000000000
+      internalID: -670329121707284240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_3
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 344
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca8298b6f46578350800000000000000
+      internalID: 6018874326110513324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_4
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 326
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8313b7d60e43f7bb0800000000000000
+      internalID: -4936168528060665544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_5
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 800
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f733f11109044840800000000000000
+      internalID: 5207296969347905524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_6
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 728
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db2d6a59d037724e0800000000000000
+      internalID: -2006508606787759427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_7
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 616
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d129ce532c3e2210800000000000000
+      internalID: 1310050664223154642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_8
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 430
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff56ee330480e4dd0800000000000000
+      internalID: -2500051671301855745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_9
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 0
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4840784feb44a1280800000000000000
+      internalID: -9071862912447478652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_10
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 484
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c0d9395c958f8f80800000000000000
+      internalID: -8102110298057879355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_11
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 0
+        width: 1406
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8115cd92839821fc0800000000000000
+      internalID: -3525604683964198632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_12
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 200
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6267f31dec0f71080800000000000000
+      internalID: -9216633341325904346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_13
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 153
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 382016a127c37b970800000000000000
+      internalID: 8770545260093833859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skip_Game_Button_14
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 66
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2699c9bafc0fb780800000000000000
+      internalID: -8665192887039191507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Skip_Game_Button_0: -6282543948999516342
+      Skip_Game_Button_1: 5482541224704974045
+      Skip_Game_Button_10: -8102110298057879355
+      Skip_Game_Button_11: -3525604683964198632
+      Skip_Game_Button_12: -9216633341325904346
+      Skip_Game_Button_13: 8770545260093833859
+      Skip_Game_Button_14: -8665192887039191507
+      Skip_Game_Button_2: -670329121707284240
+      Skip_Game_Button_3: 6018874326110513324
+      Skip_Game_Button_4: -4936168528060665544
+      Skip_Game_Button_5: 5207296969347905524
+      Skip_Game_Button_6: -2006508606787759427
+      Skip_Game_Button_7: 1310050664223154642
+      Skip_Game_Button_8: -2500051671301855745
+      Skip_Game_Button_9: -9071862912447478652
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
