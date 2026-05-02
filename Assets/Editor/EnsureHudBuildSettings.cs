@@ -11,15 +11,18 @@ namespace Simonshouse.Editor
         private static void EnsureHudSceneIncluded()
         {
             var scenes = EditorBuildSettings.scenes.ToList();
-            bool exists = scenes.Any(scene => scene.path == HudScenePath);
+            bool changed = false;
 
-            if (exists)
+            if (!scenes.Any(scene => scene.path == HudScenePath))
             {
-                return;
+                scenes.Add(new EditorBuildSettingsScene(HudScenePath, true));
+                changed = true;
             }
 
-            scenes.Add(new EditorBuildSettingsScene(HudScenePath, true));
-            EditorBuildSettings.scenes = scenes.ToArray();
+            if (changed)
+            {
+                EditorBuildSettings.scenes = scenes.ToArray();
+            }
         }
     }
 }
