@@ -1,25 +1,13 @@
 fileFormatVersion: 2
-guid: 4553cdb71366ede419e192cad22304e0
+guid: b3013b985153b574491f1adea763c543
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5257296567102980762
-    second: Robert_Assets_0
+      213: -2808162600552744416
+    second: Lucas_Assets2_0
   - first:
-      213: -4817660943756790378
-    second: Robert_Assets_1
-  - first:
-      213: -6428085580907795520
-    second: Robert_Assets_2
-  - first:
-      213: -5081974354053823405
-    second: Robert_Assets_3
-  - first:
-      213: 8299354566733623806
-    second: Robert_Assets_4
-  - first:
-      213: -5156845547469948054
-    second: Robert_Assets_5
+      213: 797639654453652176
+    second: Lucas_Assets2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Robert_Assets_0
+      name: Lucas_Assets2_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 0
-        width: 302
-        height: 1024
+        x: 346
+        y: 304
+        width: 221
+        height: 409
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a92cd099f5ba5f840800000000000000
-      internalID: 5257296567102980762
+      spriteID: 02a348a3ef66709d0800000000000000
+      internalID: -2808162600552744416
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Robert_Assets_1
+      name: Lucas_Assets2_1
       rect:
         serializedVersion: 2
-        x: 421
-        y: 325
-        width: 151
-        height: 324
+        x: 927
+        y: 299
+        width: 137
+        height: 432
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,96 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6957a1f85ea342db0800000000000000
-      internalID: -4817660943756790378
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Robert_Assets_2
-      rect:
-        serializedVersion: 2
-        x: 465
-        y: 0
-        width: 1040
-        height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0cb2e2cb83adac6a0800000000000000
-      internalID: -6428085580907795520
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Robert_Assets_3
-      rect:
-        serializedVersion: 2
-        x: 664
-        y: 321
-        width: 125
-        height: 341
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3540afc10433979b0800000000000000
-      internalID: -5081974354053823405
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Robert_Assets_4
-      rect:
-        serializedVersion: 2
-        x: 1099
-        y: 316
-        width: 406
-        height: 142
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ef17c2fa10b3d2370800000000000000
-      internalID: 8299354566733623806
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Robert_Assets_5
-      rect:
-        serializedVersion: 2
-        x: 1162
-        y: 306
-        width: 183
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a6bbf75fb443f68b0800000000000000
-      internalID: -5156845547469948054
+      spriteID: 0daa9762a09c11b00800000000000000
+      internalID: 797639654453652176
       vertices: []
       indices: 
       edges: []
@@ -260,12 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Robert_Assets_0: 5257296567102980762
-      Robert_Assets_1: -4817660943756790378
-      Robert_Assets_2: -6428085580907795520
-      Robert_Assets_3: -5081974354053823405
-      Robert_Assets_4: 8299354566733623806
-      Robert_Assets_5: -5156845547469948054
+      Lucas_Assets2_0: -2808162600552744416
+      Lucas_Assets2_1: 797639654453652176
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

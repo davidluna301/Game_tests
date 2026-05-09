@@ -1,25 +1,13 @@
 fileFormatVersion: 2
-guid: d601d69998adb554f86a47a6a2e00c8c
+guid: e9bd0f40a0cd60f48851dc5539cf6781
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8079130863785714984
-    second: Ben_Assets_0
+      213: -746767240004392838
+    second: Lisa_Assets1_0
   - first:
-      213: 5384991897181867135
-    second: Ben_Assets_1
-  - first:
-      213: -8916994180753255963
-    second: Ben_Assets_2
-  - first:
-      213: 5314120310008041895
-    second: Ben_Assets_3
-  - first:
-      213: -8680097385973790000
-    second: Ben_Assets_4
-  - first:
-      213: -3622232537540321483
-    second: Ben_Assets_5
+      213: 2512380444329581906
+    second: Lisa_Assets1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ben_Assets_0
+      name: Lisa_Assets1_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 0
-        width: 553
-        height: 1024
+        x: 331
+        y: 274
+        width: 255
+        height: 381
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8da5822d84921ef80800000000000000
-      internalID: -8079130863785714984
+      spriteID: a78a3a9d623f2a5f0800000000000000
+      internalID: -746767240004392838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ben_Assets_1
+      name: Lisa_Assets1_1
       rect:
         serializedVersion: 2
-        x: 11
-        y: 16
-        width: 287
-        height: 348
+        x: 967
+        y: 274
+        width: 136
+        height: 403
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,96 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f7cc1ed79955bba40800000000000000
-      internalID: 5384991897181867135
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ben_Assets_2
-      rect:
-        serializedVersion: 2
-        x: 532
-        y: 11
-        width: 349
-        height: 382
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5e11aff6909704480800000000000000
-      internalID: -8916994180753255963
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ben_Assets_3
-      rect:
-        serializedVersion: 2
-        x: 635
-        y: 281
-        width: 395
-        height: 741
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7a1d7bb344c8fb940800000000000000
-      internalID: 5314120310008041895
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ben_Assets_4
-      rect:
-        serializedVersion: 2
-        x: 922
-        y: 0
-        width: 614
-        height: 280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0da4c35aa691a8780800000000000000
-      internalID: -8680097385973790000
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ben_Assets_5
-      rect:
-        serializedVersion: 2
-        x: 1042
-        y: 280
-        width: 399
-        height: 744
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 53f1c02d2be3bbdc0800000000000000
-      internalID: -3622232537540321483
+      spriteID: 25d17e4f3b4cdd220800000000000000
+      internalID: 2512380444329581906
       vertices: []
       indices: 
       edges: []
@@ -260,12 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ben_Assets_0: -8079130863785714984
-      Ben_Assets_1: 5384991897181867135
-      Ben_Assets_2: -8916994180753255963
-      Ben_Assets_3: 5314120310008041895
-      Ben_Assets_4: -8680097385973790000
-      Ben_Assets_5: -3622232537540321483
+      Lisa_Assets1_0: -746767240004392838
+      Lisa_Assets1_1: 2512380444329581906
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

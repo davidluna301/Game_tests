@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: d3074cb35b3ecd74ab0c16914b3d6728
+guid: 49c8d9e4f44dd104593fdb4d12e14ed1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2824219251577243647
-    second: Lucas_Assets_0
+      213: 6673524202480210252
+    second: Ana_Assets1_0
   - first:
-      213: 4859724059057694634
-    second: Lucas_Assets_1
-  - first:
-      213: -7443816679842870966
-    second: Lucas_Assets_2
-  - first:
-      213: 2293424975167264843
-    second: Lucas_Assets_3
+      213: 1974716770311578242
+    second: Ana_Assets1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lucas_Assets_0
+      name: Ana_Assets1_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 0
-        width: 293
-        height: 1024
+        x: 354
+        y: 148
+        width: 311
+        height: 611
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1083be5dd8b5ec8d0800000000000000
-      internalID: -2824219251577243647
+      spriteID: c411ec087ee1d9c50800000000000000
+      internalID: 6673524202480210252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lucas_Assets_1
+      name: Ana_Assets1_1
       rect:
         serializedVersion: 2
-        x: 379
-        y: 0
-        width: 1126
-        height: 1024
+        x: 978
+        y: 154
+        width: 183
+        height: 608
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,52 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa7ad86a845317340800000000000000
-      internalID: 4859724059057694634
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lucas_Assets_2
-      rect:
-        serializedVersion: 2
-        x: 493
-        y: 283
-        width: 140
-        height: 437
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a4986d03b2042b890800000000000000
-      internalID: -7443816679842870966
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lucas_Assets_3
-      rect:
-        serializedVersion: 2
-        x: 1029
-        y: 72
-        width: 493
-        height: 174
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b489ad32dd1e3df10800000000000000
-      internalID: 2293424975167264843
+      spriteID: 282ad6aa07a976b10800000000000000
+      internalID: 1974716770311578242
       vertices: []
       indices: 
       edges: []
@@ -210,10 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lucas_Assets_0: -2824219251577243647
-      Lucas_Assets_1: 4859724059057694634
-      Lucas_Assets_2: -7443816679842870966
-      Lucas_Assets_3: 2293424975167264843
+      Ana_Assets1_0: 6673524202480210252
+      Ana_Assets1_1: 1974716770311578242
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: 6ced8ab8eb7f75e4cb6d5d7cecf04992
+guid: 18b4915e4cf031c43b695c5526b38298
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7634461814967052343
-    second: Ana_Assets_0
+      213: -5781574222480097602
+    second: Robert_Assets1_0
   - first:
-      213: 504549470244239103
-    second: Ana_Assets_1
+      213: -2000418429115603303
+    second: Robert_Assets1_1
   - first:
-      213: 6970258780528750885
-    second: Ana_Assets_2
-  - first:
-      213: -8187323631980060806
-    second: Ana_Assets_3
-  - first:
-      213: 8576444952121692275
-    second: Ana_Assets_4
+      213: -4154411676039628404
+    second: Robert_Assets1_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ana_Assets_0
+      name: Robert_Assets1_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 700
-        height: 1024
+        x: 62
+        y: 407
+        width: 14
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +121,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7382564529e03f960800000000000000
-      internalID: 7634461814967052343
+      spriteID: ebeb48270e8b3cfa0800000000000000
+      internalID: -5781574222480097602
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ana_Assets_1
+      name: Robert_Assets1_1
       rect:
         serializedVersion: 2
-        x: 99
-        y: 318
-        width: 258
-        height: 372
+        x: 331
+        y: 263
+        width: 250
+        height: 306
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff6f489e115800700800000000000000
-      internalID: 504549470244239103
+      spriteID: 9966b6299061d34e0800000000000000
+      internalID: -2000418429115603303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ana_Assets_2
+      name: Robert_Assets1_2
       rect:
         serializedVersion: 2
-        x: 727
-        y: 0
-        width: 799
-        height: 1024
+        x: 1011
+        y: 267
+        width: 123
+        height: 340
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,52 +165,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 521b6fd4e655bb060800000000000000
-      internalID: 6970258780528750885
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ana_Assets_3
-      rect:
-        serializedVersion: 2
-        x: 751
-        y: 303
-        width: 145
-        height: 399
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a7fdaa6f888c06e80800000000000000
-      internalID: -8187323631980060806
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ana_Assets_4
-      rect:
-        serializedVersion: 2
-        x: 987
-        y: 31
-        width: 501
-        height: 170
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 370d7e67e37a50770800000000000000
-      internalID: 8576444952121692275
+      spriteID: c893ce677909856c0800000000000000
+      internalID: -4154411676039628404
       vertices: []
       indices: 
       edges: []
@@ -235,11 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ana_Assets_0: 7634461814967052343
-      Ana_Assets_1: 504549470244239103
-      Ana_Assets_2: 6970258780528750885
-      Ana_Assets_3: -8187323631980060806
-      Ana_Assets_4: 8576444952121692275
+      Robert_Assets1_0: -5781574222480097602
+      Robert_Assets1_1: -2000418429115603303
+      Robert_Assets1_2: -4154411676039628404
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
