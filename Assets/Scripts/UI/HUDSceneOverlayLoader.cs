@@ -11,7 +11,10 @@ namespace Simonshouse.UI
         private static readonly string[] ExcludedScenes =
         {
             "New Game",
-            "Chapter1"
+            "Chapter1",
+            "DeathScreen",
+            "Endings",
+            "PostCredits"
         };
 
         private static bool initialized;

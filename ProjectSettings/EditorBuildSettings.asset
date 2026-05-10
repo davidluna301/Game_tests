@@ -17,6 +17,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HUD.unity
     guid: b1babcf7f7e26b14d9eb633a92108429
+  - enabled: 1
+    path: Assets/Scenes/Estudio.unity
+    guid: 8238c82918a855449b41255889dbff46
+  - enabled: 1
+    path: Assets/Scenes/Habitacion.unity
+    guid: 3853ce67ffea56c4f8f25b4e0d9ba2fe
+  - enabled: 1
+    path: Assets/Scenes/Galeria.unity
+    guid: cfbfb5f08af11de41bccfba3138db027
+  - enabled: 1
+    path: Assets/Scenes/Sotano.unity
+    guid: 26f4d6ae3b7dcb64c9bd59dedbe9b038
+  - enabled: 1
+    path: Assets/Scenes/DeathScreen.unity
+    guid: 7f2a9c4e8b1d4056a3e7f9c2d5b8a104
+  - enabled: 1
+    path: Assets/Scenes/Endings.unity
+    guid: 8e3b8d5f9c2e4167b4f8a3c6d9e1b205
+  - enabled: 1
+    path: Assets/Scenes/PostCredits.unity
+    guid: 9f4c9e6a0d3f4278c5a9b4d7e0f2c316
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
