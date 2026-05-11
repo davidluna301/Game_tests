@@ -10,7 +10,8 @@ namespace Simonshouse.UI
         // Scenes where HUD should stay hidden/unloaded.
         private static readonly string[] ExcludedScenes =
         {
-            "New Game",
+            "MainMenu",
+            "Prologue",
             "DeathScreen",
             "Endings",
             "PostCredits"
