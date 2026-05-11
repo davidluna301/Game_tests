@@ -33,6 +33,8 @@ namespace Simonshouse.UI
         public event System.Action<string>   OnCharacterDied;
         public event System.Action<ItemData> OnItemAdded;
         public event System.Action           OnRoomClosed;   // = fin de capítulo
+        /// <summary>Alias de fin de capítulo (v0.3+); se invoca junto con <see cref="OnRoomClosed"/>.</summary>
+        public event System.Action           OnChapterEnd;
 
         // ─────────────────────────────────────────────────────────
         private void Awake()
@@ -100,6 +102,9 @@ namespace Simonshouse.UI
         }
 
         // ── Cierre de sala / capítulo ─────────────────────────────
+        /// Alias explícito de fin de capítulo (misma lógica que <see cref="CloseCurrentRoom"/>).
+        public void EndChapter() => CloseCurrentRoom();
+
         /// Aplica la mecánica de aislamiento. Llamar antes de salir de cada sala.
         public void CloseCurrentRoom()
         {
@@ -132,7 +137,10 @@ namespace Simonshouse.UI
 
             if (toKill != null) KillCharacter(toKill.Name);
 
+            HUDManager.Instance?.RefreshIsolationBars();
+
             OnRoomClosed?.Invoke();
+            OnChapterEnd?.Invoke();
         }
 
         public void KillCharacter(string name)
