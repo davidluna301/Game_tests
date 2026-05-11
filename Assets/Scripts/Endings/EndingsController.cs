@@ -194,7 +194,15 @@ namespace Simonshouse.Endings
             if (string.IsNullOrEmpty(ending))
                 ending = "C";
 
-            SceneManager.LoadScene(ending == "A" ? "PostCredits" : "MainMenu");
+            if (ending == "A")
+            {
+                PostCreditsController.EnteredFromFinalA = true;
+                SceneManager.LoadScene("PostCredits");
+            }
+            else
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
         }
     }
 }
