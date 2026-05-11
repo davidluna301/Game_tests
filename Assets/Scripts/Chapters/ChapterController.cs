@@ -17,13 +17,20 @@ namespace Simonshouse.Chapters
         [SerializeField] protected GameObject panelInteractions;
         [SerializeField] protected GameObject panelDecision;
 
-        [Header("Contenedor de opciones (compartido)")]
+        [Header("Contenedor de opciones (compartido o por fase)")]
         [SerializeField] protected Transform optionsContainer;
+        [SerializeField] protected Transform explorationOptionsContainer;
+        [SerializeField] protected Transform interactionsOptionsContainer;
+        [SerializeField] protected Transform decisionOptionsContainer;
         [SerializeField] protected GameObject optionButtonPrefab;
 
         [Header("Títulos de UI")]
         [SerializeField] protected TextMeshProUGUI textChapterTitle;
         [SerializeField] protected TextMeshProUGUI textNarrativeBox;
+
+        private Transform _optionsTarget;
+
+        protected Transform OptionsTarget => _optionsTarget != null ? _optionsTarget : optionsContainer;
 
         protected virtual void Start()
         {
@@ -46,32 +53,59 @@ namespace Simonshouse.Chapters
             if (panelInteractions != null) panelInteractions.SetActive(showInteractions);
             if (panelDecision != null) panelDecision.SetActive(showDecision);
 
-            if (optionsContainer != null)
+            if (explorationOptionsContainer != null && interactionsOptionsContainer != null &&
+                decisionOptionsContainer != null)
+            {
+                explorationOptionsContainer.gameObject.SetActive(showExploration);
+                interactionsOptionsContainer.gameObject.SetActive(showInteractions);
+                decisionOptionsContainer.gameObject.SetActive(showDecision);
+            }
+            else if (optionsContainer != null)
+            {
                 optionsContainer.gameObject.SetActive(showExploration || showInteractions || showDecision);
+            }
         }
 
         public void OnNarrativeContinue()
         {
             SetPanelState(false, true, false, false);
+            PrepareExplorationOptions();
             LoadExploration();
+        }
+
+        protected void PrepareExplorationOptions()
+        {
+            _optionsTarget = explorationOptionsContainer != null ? explorationOptionsContainer : optionsContainer;
+        }
+
+        protected void PrepareInteractionsOptions()
+        {
+            _optionsTarget = interactionsOptionsContainer != null ? interactionsOptionsContainer : optionsContainer;
+        }
+
+        protected void PrepareDecisionOptions()
+        {
+            _optionsTarget = decisionOptionsContainer != null ? decisionOptionsContainer : optionsContainer;
         }
 
         protected void GoToInteractions()
         {
             SetPanelState(false, false, true, false);
+            PrepareInteractionsOptions();
             LoadInteractions();
         }
 
         protected void GoToDecision()
         {
             SetPanelState(false, false, false, true);
+            PrepareDecisionOptions();
             LoadDecision();
         }
 
         protected void SpawnOptionButton(string label, System.Action onClick)
         {
-            if (optionButtonPrefab == null || optionsContainer == null) return;
-            var btn = Instantiate(optionButtonPrefab, optionsContainer);
+            if (optionButtonPrefab == null || OptionsTarget == null) return;
+            var btn = Instantiate(optionButtonPrefab, OptionsTarget);
             var lbl = btn.GetComponentInChildren<TextMeshProUGUI>();
             if (lbl != null) lbl.text = label;
             var button = btn.GetComponent<Button>();
@@ -81,8 +115,9 @@ namespace Simonshouse.Chapters
 
         protected void ClearOptions()
         {
-            if (optionsContainer == null) return;
-            foreach (Transform child in optionsContainer)
+            var t = OptionsTarget;
+            if (t == null) return;
+            foreach (Transform child in t)
                 Destroy(child.gameObject);
         }
 
