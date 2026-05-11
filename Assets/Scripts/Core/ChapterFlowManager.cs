@@ -72,6 +72,7 @@ namespace Simonshouse.UI
         /// Llamado por DeathScreenController cuando la cinemática termina.
         public void OnDeathScreenFinished()
         {
+            Debug.Log("[Flow] OnDeathScreenFinished — descargando DeathScreen y cargando " + nextSceneName);
             pendingDeathCharacter = null;
             SceneManager.UnloadSceneAsync("DeathScreen");
             SceneManager.LoadScene(nextSceneName);
