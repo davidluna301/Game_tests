@@ -67,7 +67,14 @@ namespace Simonshouse.UI
             };
         }
 
-        // ── API de sala ───────────────────────────────────────────
+        // ── API de sala / capítulo ────────────────────────────────
+        /// Fija el índice de capítulo al iniciar una escena de capítulo (ChapterController).
+        public void SetChapter(int chapter)
+        {
+            CurrentChapter = Mathf.Clamp(chapter, 0, 99);
+            Debug.Log($"[Chapter] Capítulo actual: {CurrentChapter}");
+        }
+
         /// Llamar al inicio de cada RoomSceneController (Start).
         public void EnterRoom(string roomName)
         {
