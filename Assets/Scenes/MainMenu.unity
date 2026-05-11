@@ -1058,6 +1058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063012878}
   - component: {fileID: 1063012879}
+  - component: {fileID: 1063012880}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1092,6 +1093,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c9d0e1f2a364758697a8b9c0d1e2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Simonshouse.UI.GameManager
+--- !u!114 &1063012880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063012877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d4e5f60718293a4b5c6d7e8f90a1b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Simonshouse.UI.AudioManager
+  sourceAmbient: {fileID: 0}
+  sourceEffect: {fileID: 0}
+  clipMainMenu: {fileID: 0}
+  clipChapter1: {fileID: 0}
+  clipChapter2: {fileID: 0}
+  clipChapter3: {fileID: 0}
+  clipChapter4: {fileID: 0}
+  clipChapter5: {fileID: 0}
+  clipDeath: {fileID: 0}
+  clipEndings: {fileID: 0}
+  clipPostCredits: {fileID: 0}
+  clipGlitch: {fileID: 0}
+  clipBeep: {fileID: 0}
+  clipPageTurn: {fileID: 0}
+  clipDoorCreak: {fileID: 0}
 --- !u!1 &1268048853
 GameObject:
   m_ObjectHideFlags: 0

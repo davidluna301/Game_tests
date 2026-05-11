@@ -45,6 +45,26 @@ namespace Simonshouse.UI
             InitCharacters();
         }
 
+        /// <summary>Nueva partida: inventario, pistas, capítulo y personajes a estado inicial.</summary>
+        public void ResetRunState()
+        {
+            foreach (var item in Inventory)
+            {
+                if (item != null)
+                    Destroy(item);
+            }
+
+            Inventory = new List<ItemData>();
+            Clues     = new HashSet<string>();
+            Decisions = new List<string>();
+            SimonFound = false;
+            CodeFound  = false;
+            CurrentChapter  = 0;
+            CurrentRoomName = "";
+            InitCharacters();
+            HUDManager.Instance?.RefreshIsolationBars();
+        }
+
         private void InitCharacters()
         {
             Characters = new Dictionary<string, CharacterData>

@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Simonshouse.UI;
 
 namespace Simonshouse.Endings
 {
@@ -119,6 +120,7 @@ namespace Simonshouse.Endings
         {
             if (glitchOverlay == null) yield break;
 
+            AudioManager.Instance?.PlayEffect("glitch");
             glitchOverlay.gameObject.SetActive(true);
             for (int i = 0; i < intensity; i++)
             {

@@ -1,3 +1,4 @@
+using Simonshouse.Endings;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,8 +28,9 @@ namespace Simonshouse.UI
 
         public void StartNewGame()
         {
-            // Si GameManager ya existe de una partida anterior, reiniciar estado
-            // (para v2.0: implementar GameManager.ResetState())
+            PostCreditsController.EnteredFromFinalA = false;
+            GameManager.Instance?.ResetRunState();
+            ChapterFlowManager.Instance?.ClearForNewRun();
             SceneManager.LoadScene("Prologue");
         }
 

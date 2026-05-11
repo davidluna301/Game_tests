@@ -1,3 +1,4 @@
+using Simonshouse.Endings;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -28,6 +29,9 @@ namespace Simonshouse.UI
 
         private void LoadChapter()
         {
+            PostCreditsController.EnteredFromFinalA = false;
+            GameManager.Instance?.ResetRunState();
+            ChapterFlowManager.Instance?.ClearForNewRun();
             SceneManager.LoadScene(chapterSceneName);
         }
     }

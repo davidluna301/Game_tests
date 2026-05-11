@@ -69,6 +69,13 @@ namespace Simonshouse.UI
 
         public string GetPendingDeathCharacter() => pendingDeathCharacter;
 
+        /// <summary>Limpia muerte pendiente y destino (p. ej. al iniciar nueva partida desde menú).</summary>
+        public void ClearForNewRun()
+        {
+            pendingDeathCharacter = null;
+            nextSceneName = "";
+        }
+
         /// Llamado por DeathScreenController cuando la cinemática termina.
         public void OnDeathScreenFinished()
         {
