@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Simonshouse.UI;
 using TMPro;
@@ -48,14 +47,6 @@ namespace Simonshouse.Chapters
                     "El grupo aguarda una propuesta. Cómo se organice la primera incursión en la mansión "
                     + "marcará el tono de la noche.";
             }
-        }
-
-        private static void RunDialog(DialogChain chain, Action onComplete)
-        {
-            if (DialogManager.Instance != null)
-                DialogManager.Instance.StartChain(chain, onComplete);
-            else
-                onComplete?.Invoke();
         }
 
         protected override void LoadExploration()

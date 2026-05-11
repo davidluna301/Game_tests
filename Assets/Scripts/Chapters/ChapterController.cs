@@ -1,3 +1,4 @@
+using System;
 using Simonshouse.UI;
 using TMPro;
 using UnityEngine;
@@ -133,5 +134,13 @@ namespace Simonshouse.Chapters
         protected abstract void LoadExploration();
         protected abstract void LoadInteractions();
         protected abstract void LoadDecision();
+
+        protected static void RunDialog(DialogChain chain, Action onComplete)
+        {
+            if (DialogManager.Instance != null)
+                DialogManager.Instance.StartChain(chain, onComplete);
+            else
+                onComplete?.Invoke();
+        }
     }
 }

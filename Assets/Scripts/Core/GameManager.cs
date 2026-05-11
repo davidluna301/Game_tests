@@ -100,6 +100,16 @@ namespace Simonshouse.UI
         public bool HasItem(string itemId)
             => Inventory.Exists(i => i.itemId == itemId);
 
+        /// <summary>Crea un <see cref="ItemData"/> en memoria y lo añade al inventario (p. ej. llave pequeña).</summary>
+        public void GrantItem(string itemId, string displayName = null)
+        {
+            if (string.IsNullOrEmpty(itemId) || HasItem(itemId)) return;
+            var data = ScriptableObject.CreateInstance<ItemData>();
+            data.itemId = itemId;
+            data.itemName = string.IsNullOrEmpty(displayName) ? itemId : displayName;
+            AddItem(data);
+        }
+
         public List<string> GetAliveCharacters()
         {
             var list = new List<string>();
