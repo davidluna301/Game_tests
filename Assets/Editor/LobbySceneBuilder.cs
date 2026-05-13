@@ -14,12 +14,13 @@ using UnityEngine.UI;
 
 namespace Simonshouse.EditorTools
 {
-    /// <summary>Reconstruye <c>Lobby.unity</c>: placeholders 2D, diálogos C1 v2.8, panel de decisión.</summary>
+    /// <summary>Reconstruye <c>Lobby.unity</c>: placeholders 2D, diálogos C1, panel decisión v2.9, hook en puertas.</summary>
     public static class LobbySceneBuilder
     {
         private const string LobbyPath = "Assets/Scenes/Lobby.unity";
         private const string PrefabGmPath = "Assets/Prefabs/Bootstrap/GameManager.prefab";
         private const string PrefabCfPath = "Assets/Prefabs/Bootstrap/ChapterFlowManager.prefab";
+        private const string LobbyDecisionRowPrefabPath = "Assets/Prefabs/UI/LobbyDecisionRow.prefab";
 
         private static readonly int InteractableLayer = 8;
 
@@ -30,7 +31,7 @@ namespace Simonshouse.EditorTools
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("Simonshouse/Lobby/Rebuild Lobby Scene (v2.8)")]
+        [MenuItem("Simonshouse/Lobby/Rebuild Lobby Scene (v2.9)")]
         public static void RebuildLobbyScene()
         {
             EnsureBootstrapPrefabFiles();
@@ -132,27 +133,27 @@ namespace Simonshouse.EditorTools
             CreateCharacter(layerCh.transform, "Char_Lucas", "Lucas", new Vector2(5f, -1f), new Vector2(1f, 2.5f),
                 new Color(0.35f, 0.4f, 0.48f), charId, LobbySceneV28Dialogues.Lucas);
 
-            var layerDoors = new GameObject("Layer_Doors");
-            Undo.RegisterCreatedObjectUndo(layerDoors, "Layer_Doors");
-            CreateDoor(layerDoors.transform, "Puerta_Habitacion", "Habitacion", new Vector2(-9f, 0f), new Vector2(1.5f, 3f),
-                new Color(0.35f, 0.22f, 0.12f), interactId);
-            CreateDoor(layerDoors.transform, "Puerta_Estudio", "Estudio", new Vector2(-6.5f, 0f), new Vector2(1.5f, 3f),
-                new Color(0.38f, 0.24f, 0.14f), interactId);
-            CreateDoor(layerDoors.transform, "Puerta_Galeria", "Galeria", new Vector2(6.5f, 0f), new Vector2(1.5f, 3f),
-                new Color(0.36f, 0.23f, 0.13f), interactId);
-            CreateDoor(layerDoors.transform, "Puerta_Sotano", "Sotano", new Vector2(9f, 0f), new Vector2(1.5f, 3f),
-                new Color(0.22f, 0.14f, 0.1f), interactId);
-
             var lobbyCtrlGo = new GameObject("LobbyController");
             Undo.RegisterCreatedObjectUndo(lobbyCtrlGo, "LobbyController");
             var lobbyCtrl = lobbyCtrlGo.AddComponent<LobbyController>();
+
+            CreateLobbyDecisionUi(lobbyCtrl);
+
+            var layerDoors = new GameObject("Layer_Doors");
+            Undo.RegisterCreatedObjectUndo(layerDoors, "Layer_Doors");
+            CreateDoor(layerDoors.transform, "Puerta_Habitacion", "Habitacion", new Vector2(-9f, 0f), new Vector2(1.5f, 3f),
+                new Color(0.35f, 0.22f, 0.12f), interactId, lobbyCtrl);
+            CreateDoor(layerDoors.transform, "Puerta_Estudio", "Estudio", new Vector2(-6.5f, 0f), new Vector2(1.5f, 3f),
+                new Color(0.38f, 0.24f, 0.14f), interactId, lobbyCtrl);
+            CreateDoor(layerDoors.transform, "Puerta_Galeria", "Galeria", new Vector2(6.5f, 0f), new Vector2(1.5f, 3f),
+                new Color(0.36f, 0.23f, 0.13f), interactId, lobbyCtrl);
+            CreateDoor(layerDoors.transform, "Puerta_Sotano", "Sotano", new Vector2(9f, 0f), new Vector2(1.5f, 3f),
+                new Color(0.22f, 0.14f, 0.1f), interactId, lobbyCtrl);
 
             var eventSysGo = new GameObject("EventSystem");
             Undo.RegisterCreatedObjectUndo(eventSysGo, "EventSystem");
             eventSysGo.AddComponent<EventSystem>();
             eventSysGo.AddComponent<InputSystemUIInputModule>();
-
-            CreateLobbyDecisionUi(lobbyCtrl);
 
             var bootGo = new GameObject("SceneSafetyBootstrap");
             Undo.RegisterCreatedObjectUndo(bootGo, "Bootstrap");
@@ -166,7 +167,7 @@ namespace Simonshouse.EditorTools
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
-            Debug.Log("[LobbyBuilder] Lobby v2.8 reconstruido: diálogos C1 completos, panel decisión, EventSystem.");
+            Debug.Log("[LobbyBuilder] Lobby v2.9: panel decisión, hook salida en puertas, EventSystem.");
         }
 
         private static void Stretch(RectTransform rt)
@@ -274,25 +275,61 @@ namespace Simonshouse.EditorTools
             var promptRt = promptGo.GetComponent<RectTransform>();
             promptRt.sizeDelta = new Vector2(0f, 100f);
 
-            var b1 = CreateTmpButton(inner.transform, "Btn_Decision1",
-                "[1] Proponer explorar la mansión juntos, como grupo");
-            var b2 = CreateTmpButton(inner.transform, "Btn_Decision2",
-                "[2] Sugerir que cada uno explore por su cuenta");
-            var b3 = CreateTmpButton(inner.transform, "Btn_Decision3",
-                "[3] Intentar que el grupo hable abiertamente sobre Simón");
-            foreach (var b in new[] { b1, b2, b3 })
-            {
-                var le = b.AddComponent<LayoutElement>();
-                le.preferredHeight = 60f;
-            }
+            var btnArea = new GameObject("DecisionButtonsContainer");
+            Undo.RegisterCreatedObjectUndo(btnArea, "DecisionButtonsContainer");
+            btnArea.transform.SetParent(inner.transform, false);
+            btnArea.AddComponent<RectTransform>();
+            var areaLe = btnArea.AddComponent<LayoutElement>();
+            areaLe.flexibleHeight = 1f;
+            areaLe.minHeight = 180f;
+            areaLe.preferredHeight = 220f;
+            var btnVlg = btnArea.AddComponent<VerticalLayoutGroup>();
+            btnVlg.padding = new RectOffset(0, 0, 8, 0);
+            btnVlg.spacing = 12;
+            btnVlg.childAlignment = TextAnchor.UpperCenter;
+            btnVlg.childControlHeight = true;
+            btnVlg.childControlWidth = true;
+            btnVlg.childForceExpandWidth = true;
+            btnVlg.childForceExpandHeight = false;
+
+            var rowPrefab = EnsureLobbyDecisionRowPrefab();
 
             var lcSo = new SerializedObject(lobbyCtrl);
             lcSo.FindProperty("panelDecision").objectReferenceValue = panelDecision;
-            lcSo.FindProperty("btnDecision1").objectReferenceValue = b1.GetComponent<Button>();
-            lcSo.FindProperty("btnDecision2").objectReferenceValue = b2.GetComponent<Button>();
-            lcSo.FindProperty("btnDecision3").objectReferenceValue = b3.GetComponent<Button>();
-            lcSo.FindProperty("btnConvocarGrupo").objectReferenceValue = btnConvoke.GetComponent<Button>();
+            lcSo.FindProperty("textDecisionPrompt").objectReferenceValue = promptGo.GetComponent<TextMeshProUGUI>();
+            lcSo.FindProperty("decisionButtonsContainer").objectReferenceValue = btnArea.transform;
+            lcSo.FindProperty("decisionButtonPrefab").objectReferenceValue = rowPrefab;
+            lcSo.FindProperty("btnShowDecision").objectReferenceValue = btnConvoke;
             lcSo.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static GameObject EnsureLobbyDecisionRowPrefab()
+        {
+            if (File.Exists(LobbyDecisionRowPrefabPath))
+                return AssetDatabase.LoadAssetAtPath<GameObject>(LobbyDecisionRowPrefabPath);
+
+            EnsureDir("Assets/Prefabs/UI");
+            var root = new GameObject("LobbyDecisionRow");
+            var rt = root.AddComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(900, 56);
+            var img = root.AddComponent<Image>();
+            img.color = new Color(0.22f, 0.22f, 0.28f, 1f);
+            var b = root.AddComponent<Button>();
+            b.targetGraphic = img;
+            var child = new GameObject("Text");
+            child.transform.SetParent(root.transform, false);
+            child.AddComponent<RectTransform>();
+            Stretch(child.GetComponent<RectTransform>());
+            child.AddComponent<CanvasRenderer>();
+            var tmp = child.AddComponent<TextMeshProUGUI>();
+            tmp.text = "Opción";
+            tmp.fontSize = 22;
+            tmp.color = Color.white;
+            tmp.alignment = TextAlignmentOptions.Center;
+            PrefabUtility.SaveAsPrefabAsset(root, LobbyDecisionRowPrefabPath);
+            Object.DestroyImmediate(root);
+            AssetDatabase.Refresh();
+            return AssetDatabase.LoadAssetAtPath<GameObject>(LobbyDecisionRowPrefabPath);
         }
 
         private static void EnsureBootstrapPrefabFiles()
@@ -488,7 +525,7 @@ namespace Simonshouse.EditorTools
         }
 
         private static void CreateDoor(Transform parent, string objectName, string sceneName, Vector2 pos, Vector2 size,
-            Color color, int sortingLayerId)
+            Color color, int sortingLayerId, LobbyController lobbyCtrl)
         {
             var go = new GameObject(objectName);
             Undo.RegisterCreatedObjectUndo(go, objectName);
@@ -508,6 +545,8 @@ namespace Simonshouse.EditorTools
             so.FindProperty("targetSceneName").stringValue = sceneName;
             so.FindProperty("requiredClue").stringValue = "";
             so.FindProperty("requiredItem").stringValue = "";
+            if (lobbyCtrl != null)
+                so.FindProperty("lobbyHook").objectReferenceValue = lobbyCtrl;
             so.ApplyModifiedPropertiesWithoutUndo();
         }
     }

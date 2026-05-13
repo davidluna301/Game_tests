@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Simonshouse.UI
 {
-    /// <summary>Puerta: carga escena destino. Condición opcional por pista o ítem.</summary>
+    /// <summary>Puerta: carga escena destino. Condición opcional por pista o ítem. v2.9: hook opcional al Lobby.</summary>
     public class DoorInteractable : Interactable2D
     {
         [Header("Destino")]
@@ -17,6 +17,9 @@ namespace Simonshouse.UI
         [Header("Mensajes")]
         [SerializeField, TextArea(1, 3)]
         private string lockedMessage = "La puerta está cerrada.";
+
+        [Header("Hook de sala (opcional)")]
+        [SerializeField] private LobbyController lobbyHook;
 
         protected override void Awake()
         {
@@ -50,6 +53,9 @@ namespace Simonshouse.UI
 
         private void LoadScene()
         {
+            if (lobbyHook != null && !lobbyHook.OnExitingRoom())
+                return;
+
             if (string.IsNullOrEmpty(targetSceneName))
             {
                 Debug.LogWarning($"[Door] targetSceneName vacío en {gameObject.name}");
