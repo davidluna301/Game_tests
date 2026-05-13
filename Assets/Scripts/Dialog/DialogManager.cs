@@ -68,7 +68,7 @@ namespace Simonshouse.UI
                 return;
             }
 
-            FinishChain();
+            EndChain();
         }
 
         private static bool LineRequirementsMet(DialogLine line)
@@ -92,7 +92,7 @@ namespace Simonshouse.UI
             var speaker = GetSpeakerLabel(line, _activeChain);
             hud.ShowDialog(speaker, line.content ?? "");
 
-            if (!string.IsNullOrEmpty(_activeChain.characterName) && !line.isNarration)
+            if (!string.IsNullOrEmpty(_activeChain.characterName))
                 hud.ShowCharacter(_activeChain.characterName);
             else
                 hud.SetCharacterVisible(false);
@@ -109,12 +109,23 @@ namespace Simonshouse.UI
             return chain.characterName ?? "";
         }
 
-        private void FinishChain()
+        /// <summary>Última línea consumida: bonus de conexión, cerrar HUD de diálogo y callback.</summary>
+        private void EndChain()
         {
+            var chain = _activeChain;
             var cb = _onComplete;
             _activeChain = null;
             _onComplete = null;
             _lineIndex = -1;
+
+            if (chain != null &&
+                !string.IsNullOrEmpty(chain.characterName) &&
+                GameManager.Instance != null &&
+                GameManager.Instance.Characters.TryGetValue(chain.characterName, out var c) &&
+                c.IsAlive)
+            {
+                c.Connect(20);
+            }
 
             if (HUDDialogPanel.Instance != null)
             {
