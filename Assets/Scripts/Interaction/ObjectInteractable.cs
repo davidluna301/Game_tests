@@ -1,23 +1,37 @@
-using Simonshouse.UI;
+using Simonshouse.Interaction;
 using UnityEngine;
 
-namespace Simonshouse.Interaction
+namespace Simonshouse.UI
 {
-    /// <summary>Objeto examinable: descripción (log / futuro HUD) y opcionalmente otorga ítem.</summary>
+    /// <summary>Objeto del escenario: muestra descripción en el HUD y opcionalmente guarda un ítem al pulsar Continuar.</summary>
     public class ObjectInteractable : Interactable2D
     {
-        [Header("Objeto")]
-        [SerializeField, TextArea(2, 8)] private string inspectDescription = "Un objeto que aún no tiene descripción final.";
-        [SerializeField] private string grantItemId;
-        [SerializeField] private string grantItemDisplayName;
+        [Header("Contenido del objeto")]
+        [SerializeField] private string objectTitle;
+        [SerializeField, TextArea(2, 8)] private string objectDescription;
+
+        [Header("Ítem asociado (opcional)")]
+        [SerializeField] private ItemData associatedItem;
+        [SerializeField] private bool addToInventory = true;
+
+        [Header("Pista asociada (opcional)")]
+        [SerializeField] private string clueToAdd;
 
         protected override void OnInteract()
         {
-            if (!string.IsNullOrEmpty(inspectDescription))
-                Debug.Log($"[Interactable:{interactableId}] {inspectDescription}");
+            HUDDialogPanel.Instance?.ShowObjectDescription(objectTitle, objectDescription);
 
-            if (GameManager.Instance != null && !string.IsNullOrEmpty(grantItemId))
-                GameManager.Instance.GrantItem(grantItemId, grantItemDisplayName);
+            if (!string.IsNullOrEmpty(clueToAdd))
+                GameManager.Instance?.AddClue(clueToAdd);
+
+            if (associatedItem != null && addToInventory)
+                HUDDialogPanel.Instance?.SetPendingItem(associatedItem);
+        }
+
+        protected override void OnAlreadyUsed()
+        {
+            HUDDialogPanel.Instance?.ShowObjectDescription(objectTitle,
+                $"[Ya examinado]\n{objectDescription}");
         }
     }
 }

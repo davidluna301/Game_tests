@@ -11,15 +11,24 @@ namespace Simonshouse.UI
         public static HUDDialogPanel Instance { get; private set; }
 
         [Header("Panel de diálogo")]
-        [SerializeField] private GameObject      panelDialogBox;
+        [SerializeField] private GameObject panelDialogBox;
         [SerializeField] private TextMeshProUGUI textSpeakerName;
         [SerializeField] private TextMeshProUGUI textDialogContent;
-        [SerializeField] private GameObject      iconContinue;
+        [SerializeField] private GameObject iconContinue;
+
+        [Header("Botón continuar")]
+        [SerializeField] private Button btnContinue;
 
         [Header("Frame de sprite del personaje")]
-        [SerializeField] private GameObject      panelCharacterSprite;
-        [SerializeField] private Image           imgCharacterSprite;
+        [SerializeField] private GameObject panelCharacterSprite;
+        [SerializeField] private Image imgCharacterSprite;
         [SerializeField] private TextMeshProUGUI textCharacterName;
+
+        private ItemData pendingItem;
+        private bool isObjectMode;
+
+        /// <summary>True mientras se muestra descripción de objeto (bloquear interacción de escena).</summary>
+        public bool IsObjectInteractionActive => isObjectMode;
 
         private void Awake()
         {
@@ -28,16 +37,30 @@ namespace Simonshouse.UI
 
             SetDialogVisible(false);
             SetCharacterVisible(false);
+
+            if (btnContinue != null)
+            {
+                btnContinue.onClick.RemoveAllListeners();
+                btnContinue.onClick.AddListener(OnContinuePressed);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (btnContinue != null)
+                btnContinue.onClick.RemoveListener(OnContinuePressed);
         }
 
         // ── Dialog Box ────────────────────────────────────────
         public void ShowDialog(string speaker, string content)
         {
-            if (panelDialogBox   == null) return;
+            isObjectMode = false;
+
+            if (panelDialogBox == null) return;
             panelDialogBox.SetActive(true);
-            if (iconContinue     != null) iconContinue.SetActive(false);
-            if (textSpeakerName  != null) textSpeakerName.text  = speaker.ToUpper();
-            if (textDialogContent!= null) textDialogContent.text = content;
+            if (iconContinue != null) iconContinue.SetActive(false);
+            if (textSpeakerName != null) textSpeakerName.text = string.IsNullOrEmpty(speaker) ? "" : speaker.ToUpper();
+            if (textDialogContent != null) textDialogContent.text = content;
         }
 
         public void ShowContinueIcon()
@@ -48,6 +71,45 @@ namespace Simonshouse.UI
         public void SetDialogVisible(bool visible)
         {
             if (panelDialogBox != null) panelDialogBox.SetActive(visible);
+        }
+
+        public void HideDialog() => SetDialogVisible(false);
+
+        /// <summary>Descripción de objeto: sin sprite de personaje; Continuar añade ítem pendiente.</summary>
+        public void ShowObjectDescription(string title, string description)
+        {
+            isObjectMode = true;
+            pendingItem = null;
+
+            SetCharacterVisible(false);
+
+            if (panelDialogBox != null) panelDialogBox.SetActive(true);
+            if (iconContinue != null) iconContinue.SetActive(true);
+            if (textSpeakerName != null)
+                textSpeakerName.text = string.IsNullOrEmpty(title) ? "" : title.ToUpper();
+            if (textDialogContent != null) textDialogContent.text = description ?? "";
+        }
+
+        public void SetPendingItem(ItemData item) => pendingItem = item;
+
+        /// <summary>Enlazar también desde Btn_Continue en Inspector si no se usa el cableado en <see cref="Awake"/>.</summary>
+        public void OnContinuePressed()
+        {
+            if (isObjectMode)
+            {
+                if (pendingItem != null)
+                {
+                    GameManager.Instance?.AddItem(pendingItem);
+                    pendingItem = null;
+                }
+
+                SetDialogVisible(false);
+                isObjectMode = false;
+            }
+            else
+            {
+                DialogManager.Instance?.AdvanceLine();
+            }
         }
 
         // ── Sprite del personaje ──────────────────────────────

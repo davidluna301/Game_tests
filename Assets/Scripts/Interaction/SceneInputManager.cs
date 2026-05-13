@@ -35,6 +35,9 @@ namespace Simonshouse.Interaction
             if (DialogManager.Instance != null && DialogManager.Instance.IsPlaying())
                 return;
 
+            if (HUDDialogPanel.Instance != null && HUDDialogPanel.Instance.IsObjectInteractionActive)
+                return;
+
             if (sceneCamera == null)
                 return;
 
