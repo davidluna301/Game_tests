@@ -13,6 +13,8 @@ namespace Simonshouse.Interaction
 
         private InteractableHighlight _highlight;
 
+        protected virtual void Awake() { }
+
         public void TryInteract()
         {
             if (singleUse && alreadyUsed)
