@@ -31,7 +31,7 @@ namespace Simonshouse.UI
             PostCreditsController.EnteredFromFinalA = false;
             GameManager.Instance?.ResetRunState();
             ChapterFlowManager.Instance?.ClearForNewRun();
-            SceneManager.LoadScene("Prologue");
+            SceneManager.LoadScene("Chapter1");
         }
 
         public void ContinueGame()

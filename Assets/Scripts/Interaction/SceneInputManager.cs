@@ -1,5 +1,6 @@
 using Simonshouse.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -36,6 +37,9 @@ namespace Simonshouse.Interaction
                 return;
 
             if (HUDDialogPanel.Instance != null && HUDDialogPanel.Instance.IsObjectInteractionActive)
+                return;
+
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
                 return;
 
             if (sceneCamera == null)

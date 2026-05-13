@@ -31,7 +31,7 @@ namespace Simonshouse.EditorTools
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("Simonshouse/Lobby/Rebuild Lobby Scene (v2.9)")]
+        [MenuItem("Simonshouse/Lobby/Rebuild Lobby Scene (v3.0)")]
         public static void RebuildLobbyScene()
         {
             EnsureBootstrapPrefabFiles();
@@ -163,11 +163,12 @@ namespace Simonshouse.EditorTools
                 AssetDatabase.LoadAssetAtPath<GameObject>(PrefabGmPath);
             bootSo.FindProperty("chapterFlowPrefab").objectReferenceValue =
                 AssetDatabase.LoadAssetAtPath<GameObject>(PrefabCfPath);
+            bootSo.FindProperty("editorOnlyMode").boolValue = true;
             bootSo.ApplyModifiedPropertiesWithoutUndo();
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
-            Debug.Log("[LobbyBuilder] Lobby v2.9: panel decisión, hook salida en puertas, EventSystem.");
+            Debug.Log("[LobbyBuilder] Lobby v3.0: bootstrap editor-only, panel decisión, hook salida en puertas.");
         }
 
         private static void Stretch(RectTransform rt)

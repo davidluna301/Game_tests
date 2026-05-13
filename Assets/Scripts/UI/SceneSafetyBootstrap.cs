@@ -8,11 +8,21 @@ namespace Simonshouse.UI
     /// </summary>
     public class SceneSafetyBootstrap : MonoBehaviour
     {
+        [Tooltip("En builds standalone, el componente se destruye y no instancia prefabs (el flujo pasa por MainMenu).")]
+        [SerializeField] private bool editorOnlyMode = true;
+
         [SerializeField] private GameObject gameManagerPrefab;
         [SerializeField] private GameObject chapterFlowPrefab;
 
         private void Awake()
         {
+#if !UNITY_EDITOR
+            if (editorOnlyMode)
+            {
+                Destroy(this);
+                return;
+            }
+#endif
             if (GameManager.Instance == null)
             {
                 if (gameManagerPrefab != null)

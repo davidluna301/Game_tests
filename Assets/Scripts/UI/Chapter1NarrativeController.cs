@@ -1,15 +1,22 @@
 using System.Collections;
+using Simonshouse.Chapters;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace Simonshouse.UI
 {
+    /// <summary>Intro narrativa del capítulo 1; al terminar carga la escena de gameplay del lobby (v3.0).</summary>
+    [DefaultExecutionOrder(-200)]
     public class Chapter1NarrativeController : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI paragraphText;
         [SerializeField] private float fadeDuration = 1.2f;
         [SerializeField] private float autoAdvanceSeconds = 20f;
+
+        [Header("Destino (v3.0)")]
+        [SerializeField] private string nextSceneName = "Lobby";
 
         [TextArea(4, 8)]
         [SerializeField]
@@ -22,10 +29,18 @@ namespace Simonshouse.UI
 
         private void Awake()
         {
-            if (paragraphText == null)
+            foreach (var legacy in FindObjectsByType<Chapter1Controller>(FindObjectsInactive.Include,
+                         FindObjectsSortMode.None))
             {
-                paragraphText = GetComponentInChildren<TextMeshProUGUI>(true);
+                var hostCanvas = legacy.GetComponentInParent<Canvas>();
+                if (hostCanvas != null)
+                    hostCanvas.gameObject.SetActive(false);
+                else
+                    legacy.gameObject.SetActive(false);
             }
+
+            if (paragraphText == null)
+                paragraphText = GetComponentInChildren<TextMeshProUGUI>(true);
 
             if (paragraphText == null)
             {
@@ -48,13 +63,14 @@ namespace Simonshouse.UI
                 paragraphText.text = paragraphs[i];
 
                 yield return FadeText(0f, 1f);
-
-                if (i < paragraphs.Length - 1)
-                {
-                    yield return WaitForAdvance();
-                    yield return FadeText(1f, 0f);
-                }
+                yield return WaitForAdvance();
+                yield return FadeText(1f, 0f);
             }
+
+            if (string.IsNullOrEmpty(nextSceneName))
+                nextSceneName = "Lobby";
+
+            SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
         }
 
         private IEnumerator WaitForAdvance()

@@ -41,6 +41,24 @@ namespace Simonshouse.UI
 
             if (GameManager.Instance != null)
                 GameManager.Instance.OnCharacterDied += OnCharacterDied;
+
+            SyncGroupDecisionFromGameState();
+        }
+
+        private void SyncGroupDecisionFromGameState()
+        {
+            if (GameManager.Instance?.Decisions == null)
+                return;
+
+            foreach (var id in GameManager.Instance.Decisions)
+            {
+                if (id != "grupo_unido_c1" && id != "separados_c1" && id != "hablar_c1")
+                    continue;
+                decisionMade = true;
+                if (btnShowDecision != null)
+                    btnShowDecision.SetActive(false);
+                return;
+            }
         }
 
         private void OnDestroy()
@@ -222,7 +240,7 @@ namespace Simonshouse.UI
             {
                 HUDDialogPanel.Instance?.ShowObjectDescription(
                     "ESPERA",
-                    "Antes de explorar el resto de la mansión, el grupo debe tomar una decisión.");
+                    "Toma la decisión grupal primero.");
                 return false;
             }
 

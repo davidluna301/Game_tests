@@ -1,9 +1,12 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 using TMPro;
 using Simonshouse.Chapters;
+using Simonshouse.UI;
 
 namespace Simonshouse.Editor
 {
@@ -83,6 +86,106 @@ namespace Simonshouse.Editor
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             Debug.Log("[Chapter1SceneBuilder] Chapter1 actualizado (v1.2).");
+        }
+
+        /// <summary>Desactiva el modo texto legacy y añade narrativa automática que termina en Lobby (v3.0).</summary>
+        [MenuItem("Simonshouse/Chapter1/Setup Narrative → Lobby (v3.0)")]
+        public static void SetupChapter1NarrativeV3()
+        {
+            var scene = EditorSceneManager.OpenScene("Assets/Scenes/Chapter1.unity");
+
+            foreach (var legacy in Object.FindObjectsByType<Chapter1Controller>(FindObjectsInactive.Include,
+                         FindObjectsSortMode.None))
+            {
+                Undo.RecordObject(legacy.gameObject, "Disable legacy Chapter1");
+                var hostCanvas = legacy.GetComponentInParent<Canvas>();
+                if (hostCanvas != null)
+                {
+                    Undo.RecordObject(hostCanvas.gameObject, "Disable legacy Chapter1 Canvas");
+                    hostCanvas.gameObject.SetActive(false);
+                }
+                else
+                    legacy.gameObject.SetActive(false);
+            }
+
+            const string rootName = "Chapter1_NarrativeRoot";
+            var root = GameObject.Find(rootName);
+            if (root == null)
+            {
+                root = new GameObject(rootName);
+                Undo.RegisterCreatedObjectUndo(root, rootName);
+
+                var canvasGo = new GameObject("Canvas_Narrative");
+                Undo.RegisterCreatedObjectUndo(canvasGo, "Canvas_Narrative");
+                canvasGo.transform.SetParent(root.transform, false);
+                var canvas = canvasGo.AddComponent<Canvas>();
+                canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+                canvas.sortingOrder = 10;
+                var scaler = canvasGo.AddComponent<CanvasScaler>();
+                scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+                scaler.referenceResolution = new Vector2(1920, 1080);
+                scaler.matchWidthOrHeight = 0.5f;
+                canvasGo.AddComponent<GraphicRaycaster>();
+
+                var rtCanvas = canvasGo.GetComponent<RectTransform>();
+                StretchFull(rtCanvas);
+
+                var bg = new GameObject("Img_Background");
+                Undo.RegisterCreatedObjectUndo(bg, "Img_Background");
+                bg.transform.SetParent(canvasGo.transform, false);
+                StretchFull(bg.AddComponent<RectTransform>());
+                bg.AddComponent<CanvasRenderer>();
+                var img = bg.AddComponent<Image>();
+                img.color = new Color(0.05f, 0.05f, 0.07f, 1f);
+                img.raycastTarget = false;
+
+                var tmpGo = new GameObject("Text_Narrative");
+                Undo.RegisterCreatedObjectUndo(tmpGo, "Text_Narrative");
+                tmpGo.transform.SetParent(canvasGo.transform, false);
+                var tmpRt = tmpGo.AddComponent<RectTransform>();
+                StretchFull(tmpRt);
+                tmpRt.offsetMin = new Vector2(80f, 120f);
+                tmpRt.offsetMax = new Vector2(-80f, -120f);
+                tmpGo.AddComponent<CanvasRenderer>();
+                var tmp = tmpGo.AddComponent<TextMeshProUGUI>();
+                tmp.alignment = TextAlignmentOptions.Center;
+                tmp.fontSize = 28;
+                tmp.color = Color.white;
+                tmp.enableWordWrapping = true;
+                tmp.raycastTarget = false;
+
+                var font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(
+                    "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset");
+                if (font != null)
+                    tmp.font = font;
+
+                var narrative = canvasGo.AddComponent<Chapter1NarrativeController>();
+                Undo.RegisterCreatedObjectUndo(narrative, "Chapter1NarrativeController");
+                var soNar = new SerializedObject(narrative);
+                soNar.FindProperty("paragraphText").objectReferenceValue = tmp;
+                soNar.FindProperty("nextSceneName").stringValue = "Lobby";
+                soNar.ApplyModifiedPropertiesWithoutUndo();
+            }
+
+            if (Object.FindFirstObjectByType<EventSystem>() == null)
+            {
+                var es = new GameObject("EventSystem");
+                Undo.RegisterCreatedObjectUndo(es, "EventSystem");
+                es.AddComponent<EventSystem>();
+                es.AddComponent<InputSystemUIInputModule>();
+            }
+
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
+            Debug.Log("[Chapter1SceneBuilder] v3.0: narrativa activa, Chapter1Controller desactivado, destino Lobby.");
+        }
+
+        private static void StretchFull(RectTransform rt)
+        {
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
         }
 
         private static TextMeshProUGUI GetOrCreateTmp(Transform parent, string name, Vector2 anchorMin, Vector2 anchorMax,
