@@ -1,15 +1,20 @@
 #if UNITY_EDITOR
+using System.Collections.Generic;
 using System.IO;
 using Simonshouse.Interaction;
 using Simonshouse.UI;
+using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Simonshouse.EditorTools
 {
-    /// <summary>Reconstruye <c>Lobby.unity</c> según jerarquía v2.6 (placeholders 2D).</summary>
+    /// <summary>Reconstruye <c>Lobby.unity</c>: placeholders 2D, diálogos C1 v2.8, panel de decisión.</summary>
     public static class LobbySceneBuilder
     {
         private const string LobbyPath = "Assets/Scenes/Lobby.unity";
@@ -25,7 +30,7 @@ namespace Simonshouse.EditorTools
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("Simonshouse/Lobby/Rebuild Lobby Scene (v2.7)")]
+        [MenuItem("Simonshouse/Lobby/Rebuild Lobby Scene (v2.8)")]
         public static void RebuildLobbyScene()
         {
             EnsureBootstrapPrefabFiles();
@@ -117,15 +122,15 @@ namespace Simonshouse.EditorTools
             var layerCh = new GameObject("Layer_Characters");
             Undo.RegisterCreatedObjectUndo(layerCh, "Layer_Characters");
             CreateCharacter(layerCh.transform, "Char_Robert", "Robert", new Vector2(-3f, -1f), new Vector2(1f, 2.5f),
-                new Color(0.12f, 0.18f, 0.35f), charId);
+                new Color(0.12f, 0.18f, 0.35f), charId, LobbySceneV28Dialogues.Robert);
             CreateCharacter(layerCh.transform, "Char_Ana", "Ana", new Vector2(-1f, -1f), new Vector2(1f, 2.5f),
-                new Color(0.15f, 0.35f, 0.18f), charId);
+                new Color(0.15f, 0.35f, 0.18f), charId, LobbySceneV28Dialogues.Ana);
             CreateCharacter(layerCh.transform, "Char_Ben", "Ben", new Vector2(1f, -1f), new Vector2(1f, 2.5f),
-                new Color(0.55f, 0.42f, 0.3f), charId);
+                new Color(0.55f, 0.42f, 0.3f), charId, LobbySceneV28Dialogues.Ben);
             CreateCharacter(layerCh.transform, "Char_Lisa", "Lisa", new Vector2(3f, -1f), new Vector2(1f, 2.5f),
-                new Color(0.55f, 0.25f, 0.25f), charId);
+                new Color(0.55f, 0.25f, 0.25f), charId, LobbySceneV28Dialogues.Lisa);
             CreateCharacter(layerCh.transform, "Char_Lucas", "Lucas", new Vector2(5f, -1f), new Vector2(1f, 2.5f),
-                new Color(0.35f, 0.4f, 0.48f), charId);
+                new Color(0.35f, 0.4f, 0.48f), charId, LobbySceneV28Dialogues.Lucas);
 
             var layerDoors = new GameObject("Layer_Doors");
             Undo.RegisterCreatedObjectUndo(layerDoors, "Layer_Doors");
@@ -140,7 +145,14 @@ namespace Simonshouse.EditorTools
 
             var lobbyCtrlGo = new GameObject("LobbyController");
             Undo.RegisterCreatedObjectUndo(lobbyCtrlGo, "LobbyController");
-            lobbyCtrlGo.AddComponent<LobbyController>();
+            var lobbyCtrl = lobbyCtrlGo.AddComponent<LobbyController>();
+
+            var eventSysGo = new GameObject("EventSystem");
+            Undo.RegisterCreatedObjectUndo(eventSysGo, "EventSystem");
+            eventSysGo.AddComponent<EventSystem>();
+            eventSysGo.AddComponent<InputSystemUIInputModule>();
+
+            CreateLobbyDecisionUi(lobbyCtrl);
 
             var bootGo = new GameObject("SceneSafetyBootstrap");
             Undo.RegisterCreatedObjectUndo(bootGo, "Bootstrap");
@@ -154,7 +166,133 @@ namespace Simonshouse.EditorTools
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
-            Debug.Log("[LobbyBuilder] Lobby v2.7 reconstruido. Obj_FotoGrupo inactivo hasta la primera muerte (GameObject.Find).");
+            Debug.Log("[LobbyBuilder] Lobby v2.8 reconstruido: diálogos C1 completos, panel decisión, EventSystem.");
+        }
+
+        private static void Stretch(RectTransform rt)
+        {
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
+        }
+
+        private static GameObject CreateTmp(Transform parent, string name, string text, float fontSize, Color color,
+            TextAlignmentOptions align)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            go.AddComponent<CanvasRenderer>();
+            var tmp = go.AddComponent<TextMeshProUGUI>();
+            tmp.text = text;
+            tmp.fontSize = fontSize;
+            tmp.color = color;
+            tmp.alignment = align;
+            tmp.raycastTarget = false;
+            return go;
+        }
+
+        private static GameObject CreateTmpButton(Transform parent, string name, string label)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            var img = go.AddComponent<Image>();
+            img.color = new Color(0.22f, 0.22f, 0.28f, 1f);
+            go.AddComponent<Button>();
+            go.GetComponent<RectTransform>().sizeDelta = new Vector2(900, 56);
+            var child = new GameObject("Text");
+            child.transform.SetParent(go.transform, false);
+            child.AddComponent<CanvasRenderer>();
+            var tmp = child.AddComponent<TextMeshProUGUI>();
+            Stretch(child.GetComponent<RectTransform>());
+            tmp.text = label;
+            tmp.fontSize = 22;
+            tmp.color = Color.white;
+            tmp.alignment = TextAlignmentOptions.Center;
+            return go;
+        }
+
+        private static void CreateLobbyDecisionUi(LobbyController lobbyCtrl)
+        {
+            var canvasGo = new GameObject("Canvas_LobbyUI");
+            Undo.RegisterCreatedObjectUndo(canvasGo, "Canvas_LobbyUI");
+            var canvas = canvasGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 80;
+            var scaler = canvasGo.AddComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920, 1080);
+            scaler.matchWidthOrHeight = 0.5f;
+            canvasGo.AddComponent<GraphicRaycaster>();
+            Stretch(canvasGo.GetComponent<RectTransform>());
+
+            var btnConvoke = CreateTmpButton(canvasGo.transform, "Btn_ConvocarGrupo", "Convocar al grupo");
+            {
+                var rt = btnConvoke.GetComponent<RectTransform>();
+                rt.anchorMin = new Vector2(1f, 1f);
+                rt.anchorMax = new Vector2(1f, 1f);
+                rt.pivot = new Vector2(1f, 1f);
+                rt.anchoredPosition = new Vector2(-28f, -28f);
+                rt.sizeDelta = new Vector2(320, 52);
+            }
+
+            var panelDecision = new GameObject("Panel_Decision_C1");
+            Undo.RegisterCreatedObjectUndo(panelDecision, "Panel_Decision_C1");
+            panelDecision.transform.SetParent(canvasGo.transform, false);
+            var panelRt = panelDecision.AddComponent<RectTransform>();
+            Stretch(panelRt);
+            var dim = panelDecision.AddComponent<Image>();
+            dim.color = new Color(0f, 0f, 0f, 0.58f);
+            dim.raycastTarget = true;
+            panelDecision.SetActive(false);
+
+            var inner = new GameObject("Inner");
+            inner.transform.SetParent(panelDecision.transform, false);
+            var innerRt = inner.AddComponent<RectTransform>();
+            Stretch(innerRt);
+            innerRt.offsetMin = new Vector2(140, 100);
+            innerRt.offsetMax = new Vector2(-140, -100);
+            var vlg = inner.AddComponent<VerticalLayoutGroup>();
+            vlg.padding = new RectOffset(24, 24, 24, 24);
+            vlg.spacing = 18;
+            vlg.childAlignment = TextAnchor.UpperCenter;
+            vlg.childControlHeight = true;
+            vlg.childControlWidth = true;
+            vlg.childForceExpandWidth = true;
+            vlg.childForceExpandHeight = false;
+
+            var titleGo = CreateTmp(inner.transform, "Text_DecisionTitle", "Decisión grupal — capítulo 1", 32,
+                Color.white, TextAlignmentOptions.Center);
+            var titleLe = titleGo.AddComponent<LayoutElement>();
+            titleLe.preferredHeight = 48f;
+
+            var promptGo = CreateTmp(inner.transform, "Text_DecisionPrompt",
+                "El grupo aguarda una propuesta. Cómo se organice la primera incursión en la mansión marcará el tono de la noche.",
+                22, new Color(0.85f, 0.85f, 0.88f), TextAlignmentOptions.Top);
+            var promptLe = promptGo.AddComponent<LayoutElement>();
+            promptLe.preferredHeight = 100f;
+            var promptRt = promptGo.GetComponent<RectTransform>();
+            promptRt.sizeDelta = new Vector2(0f, 100f);
+
+            var b1 = CreateTmpButton(inner.transform, "Btn_Decision1",
+                "[1] Proponer explorar la mansión juntos, como grupo");
+            var b2 = CreateTmpButton(inner.transform, "Btn_Decision2",
+                "[2] Sugerir que cada uno explore por su cuenta");
+            var b3 = CreateTmpButton(inner.transform, "Btn_Decision3",
+                "[3] Intentar que el grupo hable abiertamente sobre Simón");
+            foreach (var b in new[] { b1, b2, b3 })
+            {
+                var le = b.AddComponent<LayoutElement>();
+                le.preferredHeight = 60f;
+            }
+
+            var lcSo = new SerializedObject(lobbyCtrl);
+            lcSo.FindProperty("panelDecision").objectReferenceValue = panelDecision;
+            lcSo.FindProperty("btnDecision1").objectReferenceValue = b1.GetComponent<Button>();
+            lcSo.FindProperty("btnDecision2").objectReferenceValue = b2.GetComponent<Button>();
+            lcSo.FindProperty("btnDecision3").objectReferenceValue = b3.GetComponent<Button>();
+            lcSo.FindProperty("btnConvocarGrupo").objectReferenceValue = btnConvoke.GetComponent<Button>();
+            lcSo.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static void EnsureBootstrapPrefabFiles()
@@ -314,7 +452,7 @@ namespace Simonshouse.EditorTools
         }
 
         private static void CreateCharacter(Transform parent, string objectName, string characterName, Vector2 pos,
-            Vector2 size, Color color, int sortingLayerId)
+            Vector2 size, Color color, int sortingLayerId, IReadOnlyList<(string text, bool isNarration)> dialogRows)
         {
             var go = new GameObject(objectName);
             Undo.RegisterCreatedObjectUndo(go, objectName);
@@ -325,23 +463,23 @@ namespace Simonshouse.EditorTools
             var sr = go.AddComponent<SpriteRenderer>();
             sr.sprite = MakeSprite(color);
             sr.sortingLayerID = sortingLayerId;
-            sr.sortingOrder = 0;
-            go.AddComponent<BoxCollider2D>();
+            sr.sortingOrder = 3;
+            var box = go.AddComponent<BoxCollider2D>();
+            box.size = new Vector2(4f, 4f);
             go.AddComponent<InteractableHighlight>();
             var ch = go.AddComponent<CharacterInteractable>();
             var so = new SerializedObject(ch);
             so.FindProperty("interactableId").stringValue = objectName;
             so.FindProperty("singleUse").boolValue = false;
             so.FindProperty("characterName").stringValue = characterName;
+            so.FindProperty("characterSprite").objectReferenceValue = null;
             var lines = so.FindProperty("dialogLines");
-            lines.arraySize = 2;
-            for (var i = 0; i < 2; i++)
+            lines.arraySize = dialogRows.Count;
+            for (var i = 0; i < dialogRows.Count; i++)
             {
                 var el = lines.GetArrayElementAtIndex(i);
-                el.FindPropertyRelative("content").stringValue = i == 0
-                    ? $"{characterName} te mira con cautela. «No esperaba compañía en el lobby.»"
-                    : "El silencio de la mansión parece escuchar cada palabra.";
-                el.FindPropertyRelative("isNarration").boolValue = i == 1;
+                el.FindPropertyRelative("content").stringValue = dialogRows[i].text;
+                el.FindPropertyRelative("isNarration").boolValue = dialogRows[i].isNarration;
                 el.FindPropertyRelative("requiredClue").stringValue = "";
                 el.FindPropertyRelative("requiredItem").stringValue = "";
             }

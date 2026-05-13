@@ -24,6 +24,8 @@ namespace Simonshouse.UI
         [SerializeField] private Image imgCharacterSprite;
         [SerializeField] private TextMeshProUGUI textCharacterName;
 
+        private static Sprite _unitWhiteSprite;
+
         private ItemData pendingItem;
         private bool isObjectMode;
 
@@ -119,8 +121,30 @@ namespace Simonshouse.UI
             if (panelCharacterSprite == null) return;
             panelCharacterSprite.SetActive(true);
             if (textCharacterName != null) textCharacterName.text = charName.ToUpper();
-            if (sprite != null && imgCharacterSprite != null)
+            if (imgCharacterSprite == null) return;
+
+            if (sprite != null)
+            {
                 imgCharacterSprite.sprite = sprite;
+                imgCharacterSprite.color = Color.white;
+            }
+            else
+            {
+                imgCharacterSprite.sprite = GetOrCreateUnitWhiteSprite();
+                imgCharacterSprite.color = new Color(0.52f, 0.52f, 0.55f, 1f);
+            }
+        }
+
+        private static Sprite GetOrCreateUnitWhiteSprite()
+        {
+            if (_unitWhiteSprite != null) return _unitWhiteSprite;
+            var tex = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+            tex.SetPixel(0, 0, Color.white);
+            tex.Apply();
+            tex.hideFlags = HideFlags.HideAndDontSave;
+            _unitWhiteSprite = Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f), 100f);
+            _unitWhiteSprite.name = "HUD_UnitWhite";
+            return _unitWhiteSprite;
         }
 
         public void SetCharacterVisible(bool visible)

@@ -125,6 +125,8 @@ namespace Simonshouse.UI
                 c.IsAlive)
             {
                 c.Connect(20);
+                Debug.Log(
+                    $"[Dialog] Fin cadena '{chain.chainId}' ({chain.characterName}): InteractedThisChapter={c.InteractedThisChapter}, aislamiento={c.Isolation}");
             }
 
             if (HUDDialogPanel.Instance != null)
