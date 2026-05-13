@@ -17,6 +17,12 @@ namespace Simonshouse.UI
         [Header("Pista asociada (opcional)")]
         [SerializeField] private string clueToAdd;
 
+        [Header("Efectos sobre personajes (opcional)")]
+        [Tooltip("Nombre clave en GameManager.Characters, ej. Robert")]
+        [SerializeField] private string characterIsolationEffect;
+        [Tooltip("Positivo sube aislamiento; negativo lo baja.")]
+        [SerializeField] private int isolationAmount;
+
         protected override void OnInteract()
         {
             HUDDialogPanel.Instance?.ShowObjectDescription(objectTitle, objectDescription);
@@ -26,6 +32,14 @@ namespace Simonshouse.UI
 
             if (associatedItem != null && addToInventory)
                 HUDDialogPanel.Instance?.SetPendingItem(associatedItem);
+
+            if (!string.IsNullOrEmpty(characterIsolationEffect) &&
+                GameManager.Instance != null &&
+                GameManager.Instance.Characters.TryGetValue(characterIsolationEffect, out var c))
+            {
+                c.AddIsolation(isolationAmount);
+                Debug.Log($"[Object] {characterIsolationEffect} isolation {(isolationAmount >= 0 ? "+" : "")}{isolationAmount}");
+            }
         }
 
         protected override void OnAlreadyUsed()

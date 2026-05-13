@@ -18,19 +18,21 @@ namespace Simonshouse.EditorTools
 
         private static readonly int InteractableLayer = 8;
 
-        [MenuItem("Simonshouse/Lobby/Create Bootstrap Prefabs (v2.6)")]
+        [MenuItem("Simonshouse/Lobby/Create Bootstrap Prefabs (v2.7)")]
         public static void MenuCreateBootstrapPrefabs()
         {
             EnsureBootstrapPrefabFiles();
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("Simonshouse/Lobby/Rebuild Lobby Scene (v2.6)")]
+        [MenuItem("Simonshouse/Lobby/Rebuild Lobby Scene (v2.7)")]
         public static void RebuildLobbyScene()
         {
             EnsureBootstrapPrefabFiles();
             AssetDatabase.Refresh();
             EnsureSortingLayers();
+
+            var fathersLetter = AssetDatabase.LoadAssetAtPath<ItemData>(LobbySceneV27Content.FathersLetterAssetPath);
 
             var scene = EditorSceneManager.OpenScene(LobbyPath, OpenSceneMode.Single);
             foreach (var root in scene.GetRootGameObjects())
@@ -76,33 +78,41 @@ namespace Simonshouse.EditorTools
             Undo.RegisterCreatedObjectUndo(layerProps, "Layer_Props");
             CreateSpriteChild(layerProps.transform, "Prop_Chimenea", new Vector2(-6f, -1f), new Vector2(3f, 4f),
                 new Color(0.25f, 0.14f, 0.08f), propsId, 1);
-            CreateSpriteChild(layerProps.transform, "Prop_Gramofono", new Vector2(5f, -2f), new Vector2(1f, 1.5f),
-                new Color(0.45f, 0.45f, 0.48f), propsId, 1);
-            CreateSpriteChild(layerProps.transform, "Prop_Radio", new Vector2(7f, 0f), new Vector2(1.5f, 1f),
-                new Color(0.4f, 0.4f, 0.42f), propsId, 1);
-            CreateSpriteChild(layerProps.transform, "Prop_RelojPendulo", new Vector2(-8f, 0f), new Vector2(0.8f, 3f),
-                new Color(0.45f, 0.32f, 0.22f), propsId, 1);
             CreateSpriteChild(layerProps.transform, "Prop_Sillones", new Vector2(3f, -3f), new Vector2(4f, 2f),
                 new Color(0.35f, 0.08f, 0.08f), propsId, 1);
-            CreateSpriteChild(layerProps.transform, "Prop_CajonComoda", new Vector2(-4f, -3f), new Vector2(1.5f, 0.5f),
-                new Color(0.32f, 0.2f, 0.12f), propsId, 1);
+            CreateSpriteChild(layerProps.transform, "Prop_Gramofono", new Vector2(5f, -2f), new Vector2(1f, 1.5f),
+                new Color(0.45f, 0.45f, 0.48f), propsId, 2);
+            CreateSpriteChild(layerProps.transform, "Prop_Radio", new Vector2(7f, 0f), new Vector2(1.5f, 1f),
+                new Color(0.4f, 0.4f, 0.42f), propsId, 2);
+            CreateSpriteChild(layerProps.transform, "Prop_RelojPendulo", new Vector2(-8f, 0f), new Vector2(0.8f, 3f),
+                new Color(0.45f, 0.32f, 0.22f), propsId, 2);
 
             var layerIx = new GameObject("Layer_Interactables");
             Undo.RegisterCreatedObjectUndo(layerIx, "Layer_Interactables");
-            CreateObjectInteractable(layerIx.transform, "Obj_LibroVisitas", new Vector2(-2f, -3.5f), new Vector2(0.8f, 0.5f),
-                new Color(0.95f, 0.9f, 0.75f), interactId, "Libro de visitas", "Nombres y fechas que no encajan con la historia oficial.");
-            CreateObjectInteractable(layerIx.transform, "Obj_Fotografia", new Vector2(-6f, 1.5f), new Vector2(1f, 0.8f),
-                new Color(0.55f, 0.45f, 0.35f), interactId, "Fotografía", "Un rostro borrado por el tiempo… o por alguien.");
-            CreateObjectInteractable(layerIx.transform, "Obj_Periodico", new Vector2(3.5f, -2.5f), new Vector2(0.9f, 0.6f),
-                new Color(0.9f, 0.85f, 0.2f), interactId, "Periódico", "Titulares que hablan de la mansión como de un rumor.");
-            CreateObjectInteractable(layerIx.transform, "Obj_CajonCarta", new Vector2(-4f, -3f), new Vector2(1.5f, 0.5f),
-                new Color(0.35f, 0.22f, 0.14f), interactId, "Cajón", "Algo ha sido arrancado de aquí recientemente.");
-            var abrigo = CreateObjectInteractable(layerIx.transform, "Obj_Abrigo", new Vector2(-7f, 0f), new Vector2(0.8f, 2f),
-                new Color(0.2f, 0.2f, 0.22f), interactId, "Abrigo", "Un bolsillo interior demasiado pesado para estar vacío.");
-            ApplyObjectClue(abrigo, "note_coat");
-            var fotoGrupo = CreateObjectInteractable(layerIx.transform, "Obj_FotoGrupo", new Vector2(-6f, 1f), new Vector2(1f, 0.8f),
-                new Color(0.55f, 0.1f, 0.1f), interactId, "Foto de grupo", "Cinco rostros… y uno que no debería estar ahí.");
-            fotoGrupo.SetActive(false);
+            CreateObjectInteractable(layerIx.transform, "Obj_LibroVisitas", LobbySceneV27Content.IdLibroVisitas,
+                new Vector2(-2f, -3.5f), new Vector2(0.8f, 0.5f), new Color(0.95f, 0.9f, 0.75f), interactId,
+                "Libro de visitas", LobbySceneV27Content.DescLibroVisitas, "entry_crossed",
+                "", 0, null, true, true);
+            CreateObjectInteractable(layerIx.transform, "Obj_Fotografia", LobbySceneV27Content.IdFotoChimenea,
+                new Vector2(-6f, 1.5f), new Vector2(1f, 0.8f), new Color(0.55f, 0.45f, 0.35f), interactId,
+                "Fotografía — Padre e hijo", LobbySceneV27Content.DescFotografia, "photo_father_son",
+                "Robert", 10, null, true, true);
+            CreateObjectInteractable(layerIx.transform, "Obj_Periodico", LobbySceneV27Content.IdPeriodico,
+                new Vector2(3.5f, -2.5f), new Vector2(0.9f, 0.6f), new Color(0.9f, 0.85f, 0.2f), interactId,
+                "Periódico local", LobbySceneV27Content.DescPeriodico, "fire_newspaper",
+                "Lisa", -10, null, true, true);
+            CreateObjectInteractable(layerIx.transform, "Obj_CajonCarta", LobbySceneV27Content.IdCajonCarta,
+                new Vector2(-4f, -3f), new Vector2(1.5f, 0.5f), new Color(0.35f, 0.22f, 0.14f), interactId,
+                "Cajón de la cómoda", LobbySceneV27Content.DescCajonCarta, "fathers_letter_found",
+                "", 0, fathersLetter, true, true);
+            CreateObjectInteractable(layerIx.transform, "Obj_Abrigo", LobbySceneV27Content.IdAbrigo,
+                new Vector2(-7f, 0f), new Vector2(0.8f, 2f), new Color(0.2f, 0.2f, 0.22f), interactId,
+                "Abrigo en el perchero", LobbySceneV27Content.DescAbrigo, "note_coat",
+                "", 0, null, true, true);
+            CreateObjectInteractable(layerIx.transform, "Obj_FotoGrupo", LobbySceneV27Content.IdFotoGrupo,
+                new Vector2(-6f, 1f), new Vector2(1f, 0.8f), new Color(0.55f, 0.1f, 0.1f), interactId,
+                "Fotografía del grupo", LobbySceneV27Content.DescFotoGrupo, "photo_group_marked",
+                "", 0, null, true, false);
 
             var layerCh = new GameObject("Layer_Characters");
             Undo.RegisterCreatedObjectUndo(layerCh, "Layer_Characters");
@@ -130,10 +140,7 @@ namespace Simonshouse.EditorTools
 
             var lobbyCtrlGo = new GameObject("LobbyController");
             Undo.RegisterCreatedObjectUndo(lobbyCtrlGo, "LobbyController");
-            var lobbyCtrl = lobbyCtrlGo.AddComponent<LobbyController>();
-            var lobbySo = new SerializedObject(lobbyCtrl);
-            lobbySo.FindProperty("objFotoGrupo").objectReferenceValue = fotoGrupo;
-            lobbySo.ApplyModifiedPropertiesWithoutUndo();
+            lobbyCtrlGo.AddComponent<LobbyController>();
 
             var bootGo = new GameObject("SceneSafetyBootstrap");
             Undo.RegisterCreatedObjectUndo(bootGo, "Bootstrap");
@@ -147,7 +154,7 @@ namespace Simonshouse.EditorTools
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
-            Debug.Log("[LobbyBuilder] Lobby reconstruido. Obj_FotoGrupo inactivo; LobbyController lo activa tras la primera muerte.");
+            Debug.Log("[LobbyBuilder] Lobby v2.7 reconstruido. Obj_FotoGrupo inactivo hasta la primera muerte (GameObject.Find).");
         }
 
         private static void EnsureBootstrapPrefabFiles()
@@ -261,11 +268,25 @@ namespace Simonshouse.EditorTools
             return go;
         }
 
-        private static GameObject CreateObjectInteractable(Transform parent, string name, Vector2 pos, Vector2 size,
-            Color color, int sortingLayerId, string title, string description)
+        private static GameObject CreateObjectInteractable(
+            Transform parent,
+            string goName,
+            string interactableId,
+            Vector2 pos,
+            Vector2 size,
+            Color color,
+            int sortingLayerId,
+            string title,
+            string description,
+            string clueToAdd,
+            string characterIsolationEffect,
+            int isolationAmount,
+            ItemData associatedItem,
+            bool addToInventory,
+            bool startActive)
         {
-            var go = new GameObject(name);
-            Undo.RegisterCreatedObjectUndo(go, name);
+            var go = new GameObject(goName);
+            Undo.RegisterCreatedObjectUndo(go, goName);
             go.transform.SetParent(parent, false);
             go.transform.localPosition = new Vector3(pos.x, pos.y, 0f);
             go.transform.localScale = new Vector3(size.x / 4f, size.y / 4f, 1f);
@@ -276,24 +297,20 @@ namespace Simonshouse.EditorTools
             sr.sortingOrder = 1;
             go.AddComponent<BoxCollider2D>();
             go.AddComponent<InteractableHighlight>();
-            var oi = go.AddComponent<ObjectInteractable>();
-            var so = new SerializedObject(oi);
-            so.FindProperty("interactableId").stringValue = name;
+            go.AddComponent<ObjectInteractable>();
+            var so = new SerializedObject(go.GetComponent<ObjectInteractable>());
+            so.FindProperty("interactableId").stringValue = interactableId;
             so.FindProperty("singleUse").boolValue = true;
             so.FindProperty("objectTitle").stringValue = title;
             so.FindProperty("objectDescription").stringValue = description;
+            so.FindProperty("clueToAdd").stringValue = clueToAdd ?? "";
+            so.FindProperty("characterIsolationEffect").stringValue = characterIsolationEffect ?? "";
+            so.FindProperty("isolationAmount").intValue = isolationAmount;
+            so.FindProperty("associatedItem").objectReferenceValue = associatedItem;
+            so.FindProperty("addToInventory").boolValue = addToInventory;
             so.ApplyModifiedPropertiesWithoutUndo();
+            go.SetActive(startActive);
             return go;
-        }
-
-        private static void ApplyObjectClue(GameObject go, string clueId)
-        {
-            var oi = go.GetComponent<ObjectInteractable>();
-            if (oi == null)
-                return;
-            var so = new SerializedObject(oi);
-            so.FindProperty("clueToAdd").stringValue = clueId;
-            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static void CreateCharacter(Transform parent, string objectName, string characterName, Vector2 pos,
