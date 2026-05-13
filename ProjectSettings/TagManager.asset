@@ -38,6 +38,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2105190001
+    locked: 0
+  - name: Props
+    uniqueID: 2105190002
+    locked: 0
+  - name: Interactables
+    uniqueID: 2105190003
+    locked: 0
+  - name: Characters
+    uniqueID: 2105190004
+    locked: 0
+  - name: Effects
+    uniqueID: 2105190005
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
