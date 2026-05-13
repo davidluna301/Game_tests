@@ -1,20 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Simonshouse.UI
 {
+    /// <summary>
+    /// Carga la escena HUD en modo additive solo sobre las salas de gameplay listadas.
+    /// Se suscribe a <see cref="SceneManager.sceneLoaded"/> para cualquier transición.
+    /// </summary>
     public static class HUDSceneOverlayLoader
     {
         private const string HudSceneName = "HUD";
 
-        // Scenes where HUD should stay hidden/unloaded.
-        private static readonly string[] ExcludedScenes =
+        /// <summary>Solo estas escenas activan el HUD (carga additive).</summary>
+        private static readonly HashSet<string> GameplayScenes = new()
         {
-            "MainMenu",
-            "Prologue",
-            "DeathScreen",
-            "Endings",
-            "PostCredits"
+            "Lobby",
+            "Estudio",
+            "Habitacion",
+            "Galeria",
+            "Sotano"
         };
 
         private static bool initialized;
@@ -23,58 +28,50 @@ namespace Simonshouse.UI
         private static void Initialize()
         {
             if (initialized)
-            {
                 return;
-            }
 
             initialized = true;
             SceneManager.sceneLoaded += OnSceneLoaded;
-            UpdateHudStateFor(SceneManager.GetActiveScene());
+            ApplyForScene(SceneManager.GetActiveScene());
         }
 
         private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            if (mode == LoadSceneMode.Additive)
+                return;
+
+            ApplyForScene(scene);
+        }
+
+        private static void ApplyForScene(Scene scene)
+        {
             if (scene.name == HudSceneName)
-            {
                 return;
-            }
 
-            UpdateHudStateFor(scene);
+            bool isGameplay = GameplayScenes.Contains(scene.name);
+
+            if (isGameplay)
+                EnsureHudLoaded();
+            else
+                EnsureHudUnloaded();
         }
 
-        private static void UpdateHudStateFor(Scene activeScene)
+        private static void EnsureHudLoaded()
         {
-            bool shouldHideHud = IsExcluded(activeScene.name);
             Scene hudScene = SceneManager.GetSceneByName(HudSceneName);
-            bool hudLoaded = hudScene.IsValid() && hudScene.isLoaded;
-
-            if (shouldHideHud)
-            {
-                if (hudLoaded)
-                {
-                    SceneManager.UnloadSceneAsync(HudSceneName);
-                }
-
+            if (hudScene.IsValid() && hudScene.isLoaded)
                 return;
-            }
 
-            if (!hudLoaded)
-            {
-                SceneManager.LoadSceneAsync(HudSceneName, LoadSceneMode.Additive);
-            }
+            SceneManager.LoadSceneAsync(HudSceneName, LoadSceneMode.Additive);
         }
 
-        private static bool IsExcluded(string sceneName)
+        private static void EnsureHudUnloaded()
         {
-            for (int i = 0; i < ExcludedScenes.Length; i++)
-            {
-                if (ExcludedScenes[i] == sceneName)
-                {
-                    return true;
-                }
-            }
+            Scene hudScene = SceneManager.GetSceneByName(HudSceneName);
+            if (!hudScene.IsValid() || !hudScene.isLoaded)
+                return;
 
-            return false;
+            SceneManager.UnloadSceneAsync(hudScene);
         }
     }
 }

@@ -120,7 +120,6 @@ namespace Simonshouse.UI
                         textMechanics.text = mechanicsNarrative;
                     break;
                 default:
-                    SceneManager.LoadScene("HUD", LoadSceneMode.Additive);
                     SceneManager.LoadScene("Chapter1");
                     break;
             }
