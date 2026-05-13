@@ -30,6 +30,9 @@ namespace Simonshouse.UI
                 Instance = null;
         }
 
+        /// <summary>True mientras una cadena está activa (bloquear input de escena).</summary>
+        public bool IsPlaying() => _activeChain != null;
+
         /// <summary>Inicia una cadena. Al terminar todas las líneas (clics), invoca <paramref name="onComplete"/>.</summary>
         public void StartChain(DialogChain chain, Action onComplete = null)
         {
